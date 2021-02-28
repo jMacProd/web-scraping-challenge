@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[159]:
+# In[528]:
 
 
 # Dependencies
@@ -15,7 +15,7 @@ from bs4 import BeautifulSoup as bs
 import requests
 
 
-# In[160]:
+# In[529]:
 
 
 #splinter actications
@@ -27,7 +27,7 @@ browser = Browser('chrome', **executable_path, headless=False)
 
 # ### NASA Mars News
 
-# In[161]:
+# In[530]:
 
 
 #Tell the splinter browser to go to this website
@@ -35,21 +35,7 @@ url = 'https://mars.nasa.gov/news/'
 browser.visit(url)
 
 
-# In[ ]:
-
-
-# URL of page to be scraped - this the beautiful soup straight from htm - didn;t pick up all html
-#url = 'https://mars.nasa.gov/news/?page=0&per_page=40&order=publish_date+desc%2Ccreated_at+desc&search=&category=19%2C165%2C184%2C204&blank_scope=Latest'
-
-
-# In[ ]:
-
-
-# Retrieve page with the requests module
-#response = requests.get(url)
-
-
-# In[162]:
+# In[531]:
 
 
 # Create BeautifulSoup object; parse with 'html.parser' - using the splinter browser
@@ -57,14 +43,14 @@ html = browser.html
 soup = bs(html, 'html.parser')
 
 
-# In[163]:
+# In[532]:
 
 
-print(soup.prettify())
+#print(soup.prettify())
 #now the full html has appeared
 
 
-# In[166]:
+# In[533]:
 
 
 #Collect the latest News Title and Paragraph Text
@@ -73,7 +59,7 @@ print(soup.prettify())
 results = soup.find_all('li', class_='slide')
 
 
-# In[226]:
+# In[534]:
 
 
 #Assign the text to variables that you can reference later
@@ -101,34 +87,23 @@ for result in results:
     paragraph_text.append(article_teaser_text)
     
     
-    print("")
-    print(title_text)
-    print("--")
-    print(article_teaser_text)
-    print("--------------------")
+    #print("")
+    #print(title_text)
+    #print("--")
+    #print(article_teaser_text)
+    #print("--------------------")
 
 
-# In[224]:
+# In[535]:
 
 
-browser.links.find_by_partial_text('More')
-
-
-# In[ ]:
-
-
-# Retrieve the Paragraph Text
-
-#    article_teaser = result.find('div', class_='article_teaser_body')
-   
-   # Access the thread's text content
-#    article_teaser_text = article_teaser.text
-#    print(article_teaser_text)
+# Close the browser after scraping
+browser.quit()
 
 
 # ### JPL Mars Space Images - Featured Image
 
-# In[168]:
+# In[536]:
 
 
 #set new browser
@@ -140,7 +115,7 @@ urlfi = 'https://data-class-jpl-space.s3.amazonaws.com/JPL_Space/'
 browserfi.visit(urlfi + 'index.html')
 
 
-# In[169]:
+# In[537]:
 
 
 # Create BeautifulSoup object; parse with 'html.parser' - using the splinter browser
@@ -148,13 +123,13 @@ htmlfi = browserfi.html
 soupfi = bs(htmlfi, 'html.parser')
 
 
-# In[170]:
+# In[538]:
 
 
-print(soupfi.prettify())
+#print(soupfi.prettify())
 
 
-# In[171]:
+# In[539]:
 
 
 #Collect the image container
@@ -162,13 +137,13 @@ print(soupfi.prettify())
 resultsfi = soupfi.find('div', class_='floating_text_area')
 
 
-# In[172]:
+# In[540]:
 
 
-resultsfi
+#resultsfi
 
 
-# In[173]:
+# In[541]:
 
 
 # Assign the url string to a variable called `featured_image_url`.
@@ -176,86 +151,92 @@ resultsfi
 link = resultsfi.a['href']
 featured_image_url = urlfi + link
 
-featured_image_url
+#featured_image_url
+
+
+# In[542]:
+
+
+browserfi.quit()
 
 
 # ### Mars Facts Table
 
-# In[174]:
+# In[543]:
 
 
 #Visit the Mars Facts webpage [here](https://space-facts.com/mars/)
 urlmf = 'https://space-facts.com/mars/'
 
 
-# In[175]:
+# In[544]:
 
 
 # Use Pandas to scrape the table containing facts about the planet including Diameter, Mass, etc.
     # Use Panda's `read_html` to parse the url
 
 tables = pd.read_html(urlmf)
-tables
+#tables
 
 
-# In[176]:
+# In[545]:
 
 
 mars_fact = tables[0]
-mars_fact
+#mars_fact
 
 
-# In[177]:
+# In[546]:
 
 
 #reset index
 mars_fact.set_index(0, inplace=True)
 
 
-# In[178]:
+# In[547]:
 
 
-mars_fact
+#mars_fact
 
 
-# In[179]:
+# In[548]:
 
 
 #remove index label
 mars_fact.index.names = ['']
-mars_fact
+#mars_fact
 
 
-# In[180]:
+# In[549]:
 
 
 #reset columns
 mars_fact.columns = ['Mars']
-mars_fact
+#mars_fact
 
 
-# In[181]:
+# In[550]:
 
 
 #Use Pandas to convert the data to a HTML table string.
 mars_fact_html = mars_fact.to_html()
-mars_fact_html
+#mars_fact_html
 
 
-# In[182]:
+# In[551]:
 
 
 #You may have to strip unwanted newlines to clean up the table.
 mars_fact_html = mars_fact_html.replace('\n', '')
 
 
-# In[183]:
+# In[552]:
 
 
-mars_fact_html
+#mars_fact_html
 
 
-# In[184]:
+# In[553]:
 
 
 #You can also save the table directly to a file.
@@ -263,22 +244,16 @@ mars_fact_html
 mars_fact.to_html('mars_fact.html')
 
 
-# In[185]:
-
-
-get_ipython().system('open mars_fact.html')
-
-
 # ### Mars Hemispheres
 # Visit the USGS Astrogeology site [here](https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars) to obtain high resolution images for each of Mar's hemispheres.
 
-# In[356]:
+# In[554]:
 
 
-#https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars
-    #You will need to click each of the links to the hemispheres
-        #in order to find the image url to the full resolution image.
-        
+from time import sleep
+
+sleep(1)
+
 #set new browser
 browsermh = Browser('chrome', **executable_path, headless=False)
 
@@ -289,57 +264,30 @@ browsermh.visit(urlmh)
         
 
 
-# In[299]:
-
-
-# Create BeautifulSoup object; parse with 'html.parser' - using the splinter browser
-#htmlmh = browsermh.html
-
-
-# In[ ]:
-
-
-#print(soupmh.prettify())
-
-
-# In[ ]:
-
-
-#Collect the link container
-
-#resultsmh = soupmh.find_all('div', class_='description')
-#resultsmh
-
-
-# In[324]:
+# In[555]:
 
 
 #define main url
 main_page = "https://astrogeology.usgs.gov"
-print(main_page)
+#print(main_page)
 
 
-# In[362]:
+# In[556]:
 
 
 #create list called hemisphere_image_urls
+
+hemheader = []
 hemisphere_image_urls = []
-hemisphere_image_urls
 
 
-# In[308]:
-
-
-from time import sleep
-
-
-# In[357]:
+# In[557]:
 
 
 # Loop through returned results
 for x in range(0, 4):
     
-    sleep(2)
+    sleep(1)
     
     # Create BeautifulSoup object; parse with 'html.parser' - using the splinter browser
     htmlmh = browsermh.html
@@ -359,81 +307,67 @@ for x in range(0, 4):
     
     #Retrieve header
     header = resultsmh[x].a.text
-    print(header)
-    print("--")
+    #print(header)
+    #print("--")
     
     
     #clicks on x link to go to next page
     browsermh.visit(main_page+linkcontmh)
-    #browser.click_link_by_href('https://astrogeology.usgs.gov/search/map/Mars/Viking/cerberus_enhanced')
-    #browsernp.links.find_by_partial_text(linkcontmh)
-    sleep(2)
+    
+    sleep(1)
     #print(browsermh.url)
     
-    responsenp = requests.get(browsermh.url)
-    soupnp = bs(responsenp.text, 'html.parser')
+    htmlnp = browsermh.html
+    soupnp = bs(htmlnp, 'html.parser')
     
     #Collect np link container
-    resultsnp = soupnp.find('div', class_='downloads')
+    resultsnp = soupnp.find('div', class_='wide-image-wrapper')
     #print(resultsnp)
     
     
+    find_images = resultsnp.find_all('img')[1]
+    
+    
     #Find second li tag
-    litag = resultsnp.find('img', class_='wide_image')
-    
-    ############THIS IS KILLING ME - WHY CAN I NOT GET THE INAGE SOURCE
-    litag.get['src']
-    
+    litag = find_images['src']
     
 
     
-    #find image url
-    #imgnplink = litag['src']
-    #print(imgnplink)
-    
           
-    #imgnp_url = main_page+imgnplink
+    imgnp_url = main_page+litag
     #print(imgnp_url)
           
-          
-    print("--------")
+    #print("--------")
           
  
    
+    #Append the lists
+    hemheader.append(header)
+    hemisphere_image_urls.append(imgnp_url)
     
-    #Collect title and url into dictionary
-    #for title, img_url in XXXXX:
-    link_dict = {}
-    link_dict["title"] = header
-    link_dict["img_url"] = imgnp_url
+       
         
-    hemisphere_image_urls.append(link_dict)
+    #hemisphere_image_urls.append(link_dict)
     
     
     #Go back to main page
     browsermh.back()
-    
+
+browsermh.quit()    
 
 
-# In[363]:
+# In[560]:
 
 
-#temp solution
-link_dict = {}
-link_dict["title"] = 'Cerberus Hemisphere Enhanced'
-link_dict["img_url"] = 'https://astrogeology.usgs.gov/cache/images/f5e372a36edfa389625da6d0cc25d905_cerberus_enhanced.tif_full.jpg'
-        
-hemisphere_image_urls.append(link_dict)
+#check lists
+#hemheader
 
 
-# In[364]:
+# In[561]:
 
 
-#Check list of dictionaries
-hemisphere_image_urls
+#hemisphere_image_urls
 
-
-# ## Step 2 - MongoDB and Flask Application
 
 # In[ ]:
 
