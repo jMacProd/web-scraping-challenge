@@ -1,28 +1,30 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[528]:
-
-
-# Dependencies
-import os
-import pandas as pd
-
-#enables to read and search html
-from bs4 import BeautifulSoup as bs
-
-#allows Python to reach out to the internet 
-import requests
-
-
-# In[529]:
-
-
-#splinter actications
-from splinter import Browser
-from webdriver_manager.chrome import ChromeDriverManager
-
 def scrape():
+
+    #!/usr/bin/env python
+    # coding: utf-8
+
+    # In[528]:
+
+
+    # Dependencies
+    import os
+    import pandas as pd
+
+    #enables to read and search html
+    from bs4 import BeautifulSoup as bs
+
+    #allows Python to reach out to the internet 
+    import requests
+
+
+    # In[529]:
+
+
+    #splinter actications
+    from splinter import Browser
+    from webdriver_manager.chrome import ChromeDriverManager
+
+#def scrape():
 
     executable_path = {'executable_path': ChromeDriverManager().install()}
     browser = Browser('chrome', **executable_path, headless=False)
@@ -374,7 +376,7 @@ def scrape():
     # Return results
     return marsdict
 
-scrape()
+#scrape()
 
     # In[560]:
 
