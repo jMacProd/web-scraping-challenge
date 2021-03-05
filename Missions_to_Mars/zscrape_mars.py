@@ -3,7 +3,7 @@ def scrape():
     #!/usr/bin/env python
     # coding: utf-8
 
-    # In[1]:
+    # In[528]:
 
 
     # Dependencies
@@ -17,19 +17,22 @@ def scrape():
     import requests
 
 
-    # In[2]:
+    # In[529]:
 
 
     #splinter actications
     from splinter import Browser
     from webdriver_manager.chrome import ChromeDriverManager
+
+#def scrape():
+
     executable_path = {'executable_path': ChromeDriverManager().install()}
     browser = Browser('chrome', **executable_path, headless=False)
 
 
     # ### NASA Mars News
 
-    # In[3]:
+    # In[530]:
 
 
     #Tell the splinter browser to go to this website
@@ -37,7 +40,7 @@ def scrape():
     browser.visit(url)
 
 
-    # In[4]:
+    # In[531]:
 
 
     # Create BeautifulSoup object; parse with 'html.parser' - using the splinter browser
@@ -45,21 +48,23 @@ def scrape():
     soup = bs(html, 'html.parser')
 
 
-    # In[ ]:
+    # In[532]:
 
 
+    #print(soup.prettify())
+    #now the full html has appeared
 
 
-
-    # In[8]:
-
-
-    #Collect the image container
-
-    results = soup.find('li', class_='slide')
+    # In[533]:
 
 
-    # In[9]:
+    #Collect the latest News Title and Paragraph Text
+        # Examine the results, then determine element that contains sought info
+        # results are returned as an iterable list
+    results = soup.find_all('li', class_='slide')
+
+
+    # In[534]:
 
 
     #Assign the text to variables that you can reference later
@@ -67,87 +72,24 @@ def scrape():
     news_title = []
     paragraph_text = []
 
-    
-    # Retrieve the news item title
-    title = results.find('div', class_='content_title')
-        
-    # Access the titles text content
-    title_text = title.a.text
-        
-    # Retrieve the Paragraph Text
-    article_teaser = results.find('div', class_='article_teaser_body')
-        
-    # Access the paragraphs's text content
-    article_teaser_text = article_teaser.text
-        
-    #Append the lists
-    news_title.append(title_text)
-    paragraph_text.append(article_teaser_text)
-        
-        
-    #print("")
-    #print(title_text)
-    #print("--")
-    #print(article_teaser_text)
-    #print("--------------------")
-
-
-    # In[10]:
-
-
-    # Check news_title
-    #news_title
-
-
-    # In[11]:
-
-
-    # Check paragraph text
-    #paragraph_text
-
-
-    # In[ ]:
-
-
-    #print(soup.prettify())
-    #now the full html has appeared
-
-
-    # In[12]:
-
-
-    #Collect the latest News Title and Paragraph Text
-        # Examine the results, then determine element that contains sought info
-        # results are returned as an iterable list
-    #results = soup.find_all('li', class_='slide')
-
-
-    # In[ ]:
-
-
-    #Assign the text to variables that you can reference later
-
-    #news_title = []
-    #paragraph_text = []
-
     # Loop through returned results
-    #for result in results:
+    for result in results:
         
         # Retrieve the news item title
-    #    title = result.find('div', class_='content_title')
+        title = result.find('div', class_='content_title')
         
         # Access the titles text content
-    #    title_text = title.a.text
+        title_text = title.a.text
         
         # Retrieve the Paragraph Text
-    #    article_teaser = result.find('div', class_='article_teaser_body')
+        article_teaser = result.find('div', class_='article_teaser_body')
         
         # Access the paragraphs's text content
-    #    article_teaser_text = article_teaser.text
+        article_teaser_text = article_teaser.text
         
         #Append the lists
-    #    news_title.append(title_text)
-    #    paragraph_text.append(article_teaser_text)
+        news_title.append(title_text)
+        paragraph_text.append(article_teaser_text)
         
         
         #print("")
@@ -157,7 +99,7 @@ def scrape():
         #print("--------------------")
 
 
-    # In[13]:
+    # In[535]:
 
 
     # Close the browser after scraping
@@ -166,7 +108,7 @@ def scrape():
 
     # ### JPL Mars Space Images - Featured Image
 
-    # In[14]:
+    # In[536]:
 
 
     #set new browser
@@ -178,7 +120,7 @@ def scrape():
     browserfi.visit(urlfi + 'index.html')
 
 
-    # In[15]:
+    # In[537]:
 
 
     # Create BeautifulSoup object; parse with 'html.parser' - using the splinter browser
@@ -186,13 +128,13 @@ def scrape():
     soupfi = bs(htmlfi, 'html.parser')
 
 
-    # In[ ]:
+    # In[538]:
 
 
     #print(soupfi.prettify())
 
 
-    # In[16]:
+    # In[539]:
 
 
     #Collect the image container
@@ -200,13 +142,13 @@ def scrape():
     resultsfi = soupfi.find('div', class_='floating_text_area')
 
 
-    # In[ ]:
+    # In[540]:
 
 
     #resultsfi
 
 
-    # In[17]:
+    # In[541]:
 
 
     # Assign the url string to a variable called `featured_image_url`.
@@ -214,15 +156,10 @@ def scrape():
     link = resultsfi.a['href']
     featured_image_url = urlfi + link
 
-
-    # In[18]:
-
-
-    #Check image url
     #featured_image_url
 
 
-    # In[ ]:
+    # In[542]:
 
 
     browserfi.quit()
@@ -230,14 +167,14 @@ def scrape():
 
     # ### Mars Facts Table
 
-    # In[19]:
+    # In[543]:
 
 
     #Visit the Mars Facts webpage [here](https://space-facts.com/mars/)
     urlmf = 'https://space-facts.com/mars/'
 
 
-    # In[20]:
+    # In[544]:
 
 
     # Use Pandas to scrape the table containing facts about the planet including Diameter, Mass, etc.
@@ -247,28 +184,27 @@ def scrape():
     #tables
 
 
-    # In[21]:
+    # In[545]:
 
 
     mars_fact = tables[0]
     #mars_fact
 
 
-    # In[22]:
+    # In[546]:
 
 
     #reset index
     mars_fact.set_index(0, inplace=True)
 
 
-    # In[23]:
+    # In[547]:
 
 
-    # Check table
     #mars_fact
 
 
-    # In[24]:
+    # In[548]:
 
 
     #remove index label
@@ -276,21 +212,15 @@ def scrape():
     #mars_fact
 
 
-    # In[25]:
+    # In[549]:
 
 
     #reset columns
     mars_fact.columns = ['Mars']
-
-
-    # In[30]:
-
-
-    # Check mars_fact
     #mars_fact
 
 
-    # In[26]:
+    # In[550]:
 
 
     #Use Pandas to convert the data to a HTML table string.
@@ -298,20 +228,20 @@ def scrape():
     #mars_fact_html
 
 
-    # In[27]:
+    # In[551]:
 
 
     #You may have to strip unwanted newlines to clean up the table.
     mars_fact_html = mars_fact_html.replace('\n', '')
 
 
-    # In[29]:
+    # In[552]:
 
 
     #mars_fact_html
 
 
-    # In[31]:
+    # In[553]:
 
 
     #You can also save the table directly to a file.
@@ -322,10 +252,12 @@ def scrape():
     # ### Mars Hemispheres
     # Visit the USGS Astrogeology site [here](https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars) to obtain high resolution images for each of Mar's hemispheres.
 
-    # In[32]:
+    # In[554]:
 
 
     from time import sleep
+
+    sleep(1)
 
     #set new browser
     browsermh = Browser('chrome', **executable_path, headless=False)
@@ -337,7 +269,7 @@ def scrape():
             
 
 
-    # In[33]:
+    # In[555]:
 
 
     #define main url
@@ -345,7 +277,7 @@ def scrape():
     #print(main_page)
 
 
-    # In[34]:
+    # In[556]:
 
 
     #create list called hemisphere_image_urls
@@ -354,7 +286,7 @@ def scrape():
     hemisphere_image_urls = []
 
 
-    # In[35]:
+    # In[557]:
 
 
     # Loop through returned results
@@ -362,7 +294,7 @@ def scrape():
         
         sleep(1)
         
-        # converting splinter browser to html.
+        # Create BeautifulSoup object; parse with 'html.parser' - using the splinter browser
         htmlmh = browsermh.html
         
         #Parse it to Beautiful Soup - makes the html searchable by tags
@@ -390,7 +322,6 @@ def scrape():
         sleep(1)
         #print(browsermh.url)
         
-        #Create a new html splinter browser and parse into beautifulsoup
         htmlnp = browsermh.html
         soupnp = bs(htmlnp, 'html.parser')
         
@@ -398,15 +329,16 @@ def scrape():
         resultsnp = soupnp.find('div', class_='wide-image-wrapper')
         #print(resultsnp)
         
-        #Find the second img - which is the fullsized inmage that is not he download version
+        
         find_images = resultsnp.find_all('img')[1]
         
         
-        #collect the src link
+        #Find second li tag
         litag = find_images['src']
         
 
-        #Create complete link to image          
+        
+            
         imgnp_url = main_page+litag
         #print(imgnp_url)
             
@@ -428,6 +360,8 @@ def scrape():
 
     browsermh.quit()
 
+
+
     # Store data in a dictionary
     marsdict = {
         "news_title": news_title,
@@ -440,9 +374,24 @@ def scrape():
 
 
     # Return results
-    return marsdict    
+    return marsdict
 
 #scrape()
+
+    # In[560]:
+
+
+    #check lists
+    #hemheader
+
+
+    # In[561]:
+
+
+    #hemisphere_image_urls
+
+
+    # In[ ]:
 
 
 
