@@ -63,15 +63,42 @@ marscollection = mongo.db.marscollection
 #https://www.quora.com/How-can-I-print-the-contents-of-mongoDB-in-a-HTML-page-using-Python
 
 @app.route("/")
-def home():
+def index():
 #    print("Server received request for 'Home' page...")
     #return "App is working perfectly"
     
+    marsquery = marscollection.find_one()
+
+    return render_template("index.html", marsquery=marsquery)
+    
+    
+    #This tested that each component could be called individually
+    #return (
+        #marsquery["news_title"][0]
+        #marsquery["paragraph_text"][0]
+        #marsquery["featured_image_url"]
+        #marsquery["mars_table"]
+        #marsquery["hemheader"][0]
+        #marsquery["hemisphere_image_urls"][0]
+        #marsquery["hemheader"][1]}
+        #marsquery["hemisphere_image_urls"][1]}
+        #marsquery["hemheader"][2]
+        #marsquery["hemisphere_image_urls"][2]
+        #marsquery["hemheader"][3]
+        #marsquery["hemisphere_image_urls"][3]
+        #)
+
+    # query the  collection
+    #cursor = marscollection.find() 
+    #for record in cursor: 
+    #    print(record)
+
+    #example: classroom = db.classroom.find()
 
 #    my_data = marscollection.find_one()
 
     #return my_data
-    return "App is working perfectly"
+    #return "App is working perfectly"
     #return render_template("index.html", data=my_data)
 #    return jsonify(my_data)
 
@@ -88,14 +115,23 @@ def scrape():
 #   #call scrape function
     mars_scrape = scrape_mars.scrape()
 
-    return jsonify(mars_scrape)
+    #confirming scrape worked
+    #return jsonify(mars_scrape)
 
-    #Store the return value in Mongo as a Python dictionary.
-    #db.marscollection.insert_one(
-    #    marsdict
-    #    )
-    #return jsonify(marsdict)
-    #return marsdict
+    # Insert the dictionary into Mongo
+    marscollection.update({}, mars_scrape, upsert=True)
+    
+    #After loading the data go back to the home route
+        #which will then display the data
+    return redirect("/")
+
+
+
+
+    #returning the dictionary to check correctly collected
+    #return jsonify(mars_scrape)
+    #Returned the dictionary
+    
 
 
 #    return redirect("/")
