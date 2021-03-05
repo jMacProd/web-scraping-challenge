@@ -8,7 +8,7 @@
     <title>Mission to Mars</title>
 
     <!-- Bring in local CCS file -->
-    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="static/style.css">
     
     <!-- Bring in bootstrap stylesheet -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -43,7 +43,7 @@
 
     <div class="row">
 
-        <div class="col-md-12">
+        <div class="col-md-12 mt-lg-5">
 
             <h2>Latest Mars News</h2>
             
@@ -56,19 +56,23 @@
 
     <div class="row">
 
-        <div class="col-md-8">
+        <div class="col-lg-8">
 
             <h2>Featured Mars Image</h2>
             <img src="{{ marsquery.featured_image_url }}" alt="mars image">
 
         </div>
 
-        <div class="col-md-4">
+        <div class="col-lg-4">
 
             <h5>Mars Facts</h4>
-            <!--Info on how to make jinja template render html tags correctly-->
-            <!--https://overiq.com/flask-101/basics-of-jinja-template-language/-->
-            {{ marsquery.mars_table|safe }}
+            
+            <div class="table-responsive table table-striped table-sm">
+                <!--Info on how to make jinja template render html tags correctly-->
+                <!--https://overiq.com/flask-101/basics-of-jinja-template-language/-->
+                {{ marsquery.mars_table|safe }}
+            </div>
+            
 
         </div>
         
@@ -86,7 +90,7 @@
 
     <div class="row">
 
-        <div class="col-md-8">
+        <div class="col-md-6">
 
             <div class="card">
                 <img class="card-img-top" src="{{ marsquery.hemisphere_image_urls[0] }}" alt="Card image cap">
@@ -97,7 +101,7 @@
 
         </div>
 
-        <div class="col-md-8">
+        <div class="col-md-6">
 
             <div class="card">
                 <img class="card-img-top" src="{{ marsquery.hemisphere_image_urls[1] }}" alt="Card image cap">
@@ -110,7 +114,7 @@
 
     <div class="row">
 
-        <div class="col-md-8">
+        <div class="col-md-6">
 
             <div class="card">
                 <img class="card-img-top" src="{{ marsquery.hemisphere_image_urls[2] }}" alt="Card image cap">
@@ -121,7 +125,7 @@
 
         </div>
 
-        <div class="col-md-8">
+        <div class="col-md-6">
 
             <div class="card">
                 <img class="card-img-top" src="{{ marsquery.hemisphere_image_urls[3] }}" alt="Card image cap">

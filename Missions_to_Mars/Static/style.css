@@ -1,0 +1,22 @@
+#h1, h2, h3, h4, h5 {
+#    color: rgb(68, 174, 174);
+#    font-family: Georgia, serif;
+#  }
+
+  p {
+    font: 14px Helvetica, sans-serif;
+    line-height: 200%;
+  }
+
+
+
+ td {
+  font: 14px Helvetica, sans-serif;
+  line-height: 200%;
+ }
+
+
+ tbody tr th {
+  font: 14px Helvetica, sans-serif;
+  line-height: 200%;
+ }
