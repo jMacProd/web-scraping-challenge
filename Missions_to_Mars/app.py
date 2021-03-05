@@ -64,11 +64,13 @@ marscollection = mongo.db.marscollection
 
 @app.route("/")
 def index():
+#Needed to make this "index" to pick up index.html file 
 #    print("Server received request for 'Home' page...")
     #return "App is working perfectly"
     
     marsquery = marscollection.find_one()
 
+    #https://codeburst.io/jinja-2-explained-in-5-minutes-88548486834e
     return render_template("index.html", marsquery=marsquery)
     
     
