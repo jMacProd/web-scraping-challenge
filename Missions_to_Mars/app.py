@@ -1,79 +1,114 @@
+#################################################
+# Dependancies
+#################################################
 
-from flask import Flask, jsonify, render_template, redirect
+#https://medium.com/@gokulprakash22/getting-started-with-flask-pymongo-d6326db2a9a7
+from flask import Flask, jsonify, request, redirect, render_template
 from flask_pymongo import PyMongo
+
 #https://problemsolvingwithpython.com/07-Functions-and-Modules/07.05-Calling-Functions-from-Other-Files/
+#from scrape_mars import scrape
+
+#Another way to import this function in 
 import scrape_mars
+#scrape_mars.scrape <- do this in the scrape route
 
+#################################################
+# Database Setup
+#################################################
 
+#conn = 'mongodb://localhost:27017'
+#client = PyMongo.MongoClient(conn)
 
+# Define the 'classDB' database in Mongo
+#db = client.marsDB
+
+# Declare the collection
+#marscollection = db.marsDB
 
 #################################################
 # Flask Setup
 #################################################
+#https://flask-pymongo.readthedocs.io/en/latest/
+
 app = Flask(__name__)
 
+#example:app.config["MONGO_URI"] = "mongodb://localhost:27017/myDatabase"
+    # the last bit of the uri link creates the database I think
+app.config["MONGO_URI"] = 'mongodb://localhost:27017/marsDB'
+mongo = PyMongo(app)
+#client = PyMongo.MongoClient(conn)
 
-
-#################################################
-# Mongo Connection 
-#################################################
-# The default port used by MongoDB is 27017
-# https://docs.mongodb.com/manual/reference/default-mongodb-port/
-conn = 'mongodb://localhost:27017'
-client = pymongo.MongoClient(conn)
-
-
-##SAMPLE
-# Declare the database
-#db = client.fruits_db
-# Declare the collection
-#fruits = db.fruits_db
-
-
-# Declare the database
-db = client.mars_db
+# Define the 'classDB' database in Mongo
+#db = mongo.marsDB
 
 # Declare the collection
-marsdata = db.mars_db
-
-
+marscollection = mongo.db.marscollection
 
 
 #################################################
-# Flask Routes
+# scrape -Test
 #################################################
+
+#@app.route('/')
+#def home():
+#    return "App is working perfectly"
+
+
+#################################################
+# Flask Routes- Is this call to the database
+#   empty before I run the scrape path?
+#################################################
+
+#https://www.quora.com/How-can-I-print-the-contents-of-mongoDB-in-a-HTML-page-using-Python
 
 @app.route("/")
 def home():
+#    print("Server received request for 'Home' page...")
+    #return "App is working perfectly"
+    
 
-    # Return template
-    return render_template("index.html")
+#    my_data = marscollection.find_one()
+
+    #return my_data
+    return "App is working perfectly"
+    #return render_template("index.html", data=my_data)
+#    return jsonify(my_data)
+
 
 
 #################################################
-# Scrape
+# scrape
 #################################################
-# Create a route called `/scrape` that will import your `scrape_mars.py` script and call your `scrape` function
-@app.route("/api/v1.0/scrape")
 
+@app.route("/scrape")
 def scrape():
+#    print("Server received request for 'scrape' page...")
+#
+#   #call scrape function
+    mars_scrape = scrape_mars.scrape()
 
-    # Run the scrape function and save the results to a variable
-    dict = scrape_mars.scrape()
+    return jsonify(mars_scrape)
 
-    # Update the Mongo database using update and upsert=True
-    #mars_data.update({}, scraped_data, upsert=True)
-
-    # Insert the document into the database
-    # The database and collection, if they don't already exist, will be created at this point.
-    marsdata.insert_one(dict)
-
-    # Redirect to the scraped data page
-    return redirect("/data")
-
-
+    #Store the return value in Mongo as a Python dictionary.
+    #db.marscollection.insert_one(
+    #    marsdict
+    #    )
+    #return jsonify(marsdict)
+    #return marsdict
 
 
+#    return redirect("/")
 
-    if __name__ == "__main__":
+
+
+
+
+
+
+#################################################
+# End
+#################################################1
+if __name__ == "__main__":
     app.run(debug=True)
+
