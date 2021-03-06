@@ -8,7 +8,9 @@
     line-height: 200%;
   }
 
-
+thead tr th {
+  font: 14px Helvetica, sans-serif;
+}
 
  td {
   font: 14px Helvetica, sans-serif;
