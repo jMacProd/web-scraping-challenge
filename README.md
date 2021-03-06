@@ -1,7 +1,7 @@
 # web-scraping-challenge
 
 
-
+RUNNING ORDER
 def scrape():
   #Python code here
 
@@ -17,3 +17,7 @@ def scrape():
 
 #Insert retun dictionay function
 return marsdict 
+
+
+Run app.py on local drive http://127.0.0.1:5000/
+Visit http in web browser
