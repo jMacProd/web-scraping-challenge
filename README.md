@@ -27,6 +27,7 @@ Project is finalised
 * Using splinter to navigate [JPL Mars Space Images - Featured Image]((https://data-class-jpl-space.s3.amazonaws.com/JPL_Space/index.html)) and collect the image url for the current Featured Mars Image.
 * Using Pandas to scrape the table containing facts about the planet including Diameter, Mass, etc from the [Mars Facts webpage](https://space-facts.com/mars/). 
 * Visiting the [USGS Astrogeology site](https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars) to obtain high resolution images for each of Mar's hemispheres.
+* Includes code to establish the mondoDB "marsDB" and to insert a static document into the collection "marscollection" as jinja templating within the index.html requires data to initially display the html in a web browser.  
 
 ###  Step 2 - Convert Jupyter notebook into Python script
 **Execute in Mac OS Terminal**
