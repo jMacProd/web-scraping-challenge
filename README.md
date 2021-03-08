@@ -16,11 +16,11 @@ Project is finalised
 
     ### Subdirectory: **templates**
     * Contains following documents:
-        * index.html
+      * index.html
 
-### Subdirectory: **static**
-* Contains following documents:
-    * style.css    
+   ### Subdirectory: **static**
+   * Contains following documents:
+      * style.css    
 
 ## Running order and notes
 ### Step 1 - Scraping
@@ -54,11 +54,12 @@ Project is finalised
         "hemisphere_image_urls": hemisphere_image_urls
         }
 
-            #Insert retun dictionay function
-            return marsdict 
+         #Insert retun dictionay function
+         return marsdict 
 
 ### Step 4 - Launching html page
-**Run: app.py fom Terminal**
+**Run: app.py**
+* From Terminal in Python 3.6 environment
 * Visit http://127.0.0.1:5000/ in web browser
 
 ## Final Output
