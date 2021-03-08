@@ -21,7 +21,7 @@ Project is finalised
 ## Running order and notes
 ### Step 1 - Scraping
 **Run: mission_to_mars.ipynb**
-* To developing the webscraping code - using Jupyter Notebook, BeautifulSoup, Pandas, and Requests/Splinter
+* To develop the webscraping code - using Jupyter Notebook, BeautifulSoup, Pandas, and Requests/Splinter
 * Code to be used in the scrape_mars.py file.
 * Scraping the [NASA Mars News Site](https://mars.nasa.gov/news/) to collect the latest News Title and Paragraph Text.
 * Using splinter to navigate [JPL Mars Space Images - Featured Image]((https://data-class-jpl-space.s3.amazonaws.com/JPL_Space/index.html)) and collect the image url for the current Featured Mars Image.
