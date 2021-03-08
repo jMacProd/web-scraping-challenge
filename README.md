@@ -54,8 +54,8 @@ Project is finalised
         "hemisphere_image_urls": hemisphere_image_urls
         }
 
-            #Insert retun dictionay function
-            return marsdict 
+         #Insert retun dictionay function
+         return marsdict 
 
 ### Step 4 - Launching html page
 **Run: app.py fom Terminal**
