@@ -16,11 +16,11 @@ Project is finalised
 
     ### Subdirectory: **templates**
     * Contains following documents:
-        * index.html
+      * index.html
 
    ### Subdirectory: **static**
-* Contains following documents:
-    * style.css    
+   * Contains following documents:
+      * style.css    
 
 ## Running order and notes
 ### Step 1 - Scraping
