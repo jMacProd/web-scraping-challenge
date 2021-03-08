@@ -58,7 +58,8 @@ Project is finalised
          return marsdict 
 
 ### Step 4 - Launching html page
-**Run: app.py fom Terminal**
+**Run: app.py**
+* From Terminal in Python 3.6 environment
 * Visit http://127.0.0.1:5000/ in web browser
 
 ## Final Output
