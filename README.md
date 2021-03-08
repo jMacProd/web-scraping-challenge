@@ -18,7 +18,7 @@ Project is finalised
     * Contains following documents:
         * index.html
 
-### Subdirectory: **static**
+   ### Subdirectory: **static**
 * Contains following documents:
     * style.css    
 
