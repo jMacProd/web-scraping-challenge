@@ -7,7 +7,7 @@ def scrape():
     # * Developing the webscraping code to be used in a Flask web app.
     # * Using Jupyter Notebook, BeautifulSoup, Pandas, and Requests/Splinter.
 
-    # In[33]:
+    # In[1]:
 
 
     # Dependencies
@@ -21,7 +21,7 @@ def scrape():
     import requests
 
 
-    # In[34]:
+    # In[2]:
 
 
     #splinter actications
@@ -34,7 +34,7 @@ def scrape():
     # ### NASA Mars News
     # * Scraping the [NASA Mars News Site](https://mars.nasa.gov/news/) to collect the latest News Title and Paragraph Text.
 
-    # In[35]:
+    # In[3]:
 
 
     #Tell the splinter browser to go to this website
@@ -42,7 +42,7 @@ def scrape():
     browser.visit(url)
 
 
-    # In[36]:
+    # In[4]:
 
 
     # Create BeautifulSoup object; parse with 'html.parser' - using the splinter browser
@@ -50,7 +50,7 @@ def scrape():
     soup = bs(html, 'html.parser')
 
 
-    # In[37]:
+    # In[5]:
 
 
     #Collect the image container
@@ -58,7 +58,7 @@ def scrape():
     results = soup.find('li', class_='slide')
 
 
-    # In[38]:
+    # In[6]:
 
 
     #Assign the text to variables that you can reference later
@@ -91,21 +91,21 @@ def scrape():
     #print("--------------------")
 
 
-    # In[39]:
+    # In[7]:
 
 
     # Check news_title
     #news_title
 
 
-    # In[40]:
+    # In[8]:
 
 
     # Check paragraph text
     #paragraph_text
 
 
-    # In[41]:
+    # In[9]:
 
 
     # Close the browser after scraping
@@ -115,7 +115,7 @@ def scrape():
     # ### JPL Mars Space Images - Featured Image
     # *  Using splinter to navigate the site and collect the image url for the current Featured Mars Image.
 
-    # In[42]:
+    # In[10]:
 
 
     #set new browser
@@ -127,7 +127,7 @@ def scrape():
     browserfi.visit(urlfi + 'index.html')
 
 
-    # In[43]:
+    # In[11]:
 
 
     # Create BeautifulSoup object; parse with 'html.parser' - using the splinter browser
@@ -135,13 +135,13 @@ def scrape():
     soupfi = bs(htmlfi, 'html.parser')
 
 
-    # In[44]:
+    # In[12]:
 
 
     #print(soupfi.prettify())
 
 
-    # In[45]:
+    # In[13]:
 
 
     #Collect the image container
@@ -149,13 +149,13 @@ def scrape():
     resultsfi = soupfi.find('div', class_='floating_text_area')
 
 
-    # In[46]:
+    # In[14]:
 
 
     #resultsfi
 
 
-    # In[47]:
+    # In[15]:
 
 
     # Assign the url string to a variable called `featured_image_url`.
@@ -164,14 +164,14 @@ def scrape():
     featured_image_url = urlfi + link
 
 
-    # In[48]:
+    # In[16]:
 
 
     #Check image url
     #featured_image_url
 
 
-    # In[49]:
+    # In[17]:
 
 
     browserfi.quit()
@@ -180,14 +180,14 @@ def scrape():
     # ### Mars Facts Table
     # * Using Pandas to scraping the table containing facts about the planet including Diameter, Mass, etc from the [Mars Facts webpage](https://space-facts.com/mars/). 
 
-    # In[50]:
+    # In[18]:
 
 
     #Visit the Mars Facts webpage [here](https://space-facts.com/mars/)
     urlmf = 'https://space-facts.com/mars/'
 
 
-    # In[51]:
+    # In[19]:
 
 
     # Use Pandas to scrape the table containing facts about the planet including Diameter, Mass, etc.
@@ -197,28 +197,28 @@ def scrape():
     #tables
 
 
-    # In[52]:
+    # In[20]:
 
 
     mars_fact = tables[0]
     #mars_fact
 
 
-    # In[53]:
+    # In[21]:
 
 
     #reset index
     mars_fact.set_index(0, inplace=True)
 
 
-    # In[54]:
+    # In[22]:
 
 
     # Check table
     #mars_fact
 
 
-    # In[55]:
+    # In[23]:
 
 
     #remove index label
@@ -226,21 +226,21 @@ def scrape():
     #mars_fact
 
 
-    # In[56]:
+    # In[24]:
 
 
     #reset columns
     mars_fact.columns = ['Mars']
 
 
-    # In[57]:
+    # In[25]:
 
 
     # Check mars_fact
     #mars_fact
 
 
-    # In[58]:
+    # In[26]:
 
 
     #Use Pandas to convert the data to a HTML table string.
@@ -248,14 +248,14 @@ def scrape():
     #mars_fact_html
 
 
-    # In[59]:
+    # In[27]:
 
 
     #You may have to strip unwanted newlines to clean up the table.
     mars_fact_html = mars_fact_html.replace('\n', '')
 
 
-    # In[60]:
+    # In[28]:
 
 
     #mars_fact_html
@@ -264,7 +264,7 @@ def scrape():
     # ### Mars Hemispheres
     # Visiting the [USGS Astrogeology site](https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars) to obtain high resolution images for each of Mar's hemispheres.
 
-    # In[61]:
+    # In[29]:
 
 
     from time import sleep
@@ -279,7 +279,7 @@ def scrape():
             
 
 
-    # In[62]:
+    # In[30]:
 
 
     #define main url
@@ -287,7 +287,7 @@ def scrape():
     #print(main_page)
 
 
-    # In[63]:
+    # In[31]:
 
 
     #create list called hemisphere_image_urls
@@ -296,7 +296,7 @@ def scrape():
     hemisphere_image_urls = []
 
 
-    # In[64]:
+    # In[32]:
 
 
     # Loop through returned results
@@ -371,45 +371,42 @@ def scrape():
     browsermh.quit()    
 
 
-    # In[65]:
+    # In[33]:
 
 
     #check lists
     #hemheader
 
 
-    # In[66]:
+    # In[34]:
 
 
     #hemisphere_image_urls
 
 
-    # ### Next steps
-    # * convert jupyter notebook to python - executed in Mac OS Terminal with following command:
-    #     * jupyter nbconvert --to script mission_to_mars.ipynb
-    #     * Source: https://nbconvert.readthedocs.io/en/latest/usage.html
-    # * Renamed python file to scrape_mars.py
-    # * Use the scraping code to define a function in the scrape_mars.py file
+    # In[35]:
 
-    # In[ ]:
 
-    # Store data in a dictionary
+    # Module used to connect Python with MongoDb
+    import pymongo
+    # The default port used by MongoDB is 27017
+    # https://docs.mongodb.com/manual/reference/default-mongodb-port/
+    conn = 'mongodb://localhost:27017'
+    client = pymongo.MongoClient(conn)
+
+    # Define the 'classDB' database in Mongo
+    db = client.marsDB
+
+
+    #Insert dictionary code
     marsdict = {
         "news_title": news_title,
         "paragraph_text": paragraph_text,
         "featured_image_url": featured_image_url,
         "mars_table":mars_fact_html,
         "hemheader": hemheader,
-        "hemisphere_image_urls": hemisphere_image_urls        
-    }
+        "hemisphere_image_urls": hemisphere_image_urls
+        }
 
-
-
-    # Return results
-    return marsdict    
-
-#scrape()
-
-
-
-
+    #Insert return dictionay function
+    return marsdict
