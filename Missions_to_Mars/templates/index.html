@@ -20,7 +20,8 @@
 <body>
 
 <!--Needed this block code to allow jinja template function to work-->
-{% for i in range(1) %}
+
+<!--{% for i in range(1) %}-->
 
 <!-- Rows function in containers (grid created). -->
 <div class="container">
@@ -43,10 +44,18 @@
         <div class="col-md-12 mt-lg-5">
 
             <h2>Latest Mars News</h2>
-            
-            <h5>{{ marsquery["news_title"][0] }}</h4>
-            <p>{{ marsquery["paragraph_text"][0] }}</p>
+            {% if marsquery["news_title"] is not defined %}
+            <h5>Please press the Scrape New Data button to refresh</h5>
+            {% else %}
+            <h5>{{ marsquery["news_title"][0] }}</h5>
+            {% endif %}
 
+            {% if marsquery["paragraph_text"] is not defined %}
+            <p> </p>
+            {% else %}
+            <p>{{ marsquery["paragraph_text"][0] }}</p>
+            {% endif %}
+            
         </div>
 
     </div>
@@ -56,18 +65,28 @@
         <div class="col-lg-8">
 
             <h2>Featured Mars Image</h2>
+            {% if marsquery.featured_image_url is not defined %}
+            <img src="https://data-class-jpl-space.s3.amazonaws.com/JPL_Space/image/featured/mars3.jpg" alt="mars image">
+
+            {% else %}
             <img src="{{ marsquery.featured_image_url }}" alt="mars image">
+            {% endif %}
 
         </div>
 
         <div class="col-lg-4">
 
-            <h5>Mars Facts</h4>
+            <h5>Mars Facts</hf>
             
             <div class="table-responsive table table-striped table-sm">
                 <!--Info on how to make jinja template render html tags correctly-->
                 <!--https://overiq.com/flask-101/basics-of-jinja-template-language/-->
+                {% if marsquery.mars_table is not defined %}
+                <p> </p>
+
+                {% else %}
                 {{ marsquery.mars_table|safe }}
+                {% endif %}
             </div>
             
 
@@ -90,9 +109,22 @@
         <div class="col-md-6">
 
             <div class="card">
-                <img class="card-img-top" src="{{ marsquery.hemisphere_image_urls[0] }}" alt="Card image cap">
+                {% if marsquery.hemisphere_image_urls is not defined %}
+                <img class="card-img-top" src="https://astrogeology.usgs.gov/cache/images/f5e372a36edfa389625da6d0cc25d905_cerberus_enhanced.tif_full.jpg" alt="Mars Hemisphere Image 1">
+
+                {% else %}
+                <img class="card-img-top" src="{{ marsquery.hemisphere_image_urls[0] }}" alt="Mars Hemisphere Image 1">
+                {% endif %}
+
                 <div class="card-body">
+                    
+                    {% if marsquery["hemheader"] is not defined %}
+                    <h5>Cerberus Hemisphere Enhanced</h5>
+
+                    {% else %}
                     <h5>{{ marsquery["hemheader"][0] }}</h5>
+                    {% endif %}
+
                 </div>
             </div>
 
@@ -101,9 +133,19 @@
         <div class="col-md-6">
 
             <div class="card">
-                <img class="card-img-top" src="{{ marsquery.hemisphere_image_urls[1] }}" alt="Card image cap">
+                {% if marsquery.hemisphere_image_urls is not defined %}
+                <img class="card-img-top" src="https://astrogeology.usgs.gov/cache/images/3778f7b43bbbc89d6e3cfabb3613ba93_schiaparelli_enhanced.tif_full.jpg" alt="Mars Hemisphere Image 2">
+
+                {% else %}
+                <img class="card-img-top" src="{{ marsquery.hemisphere_image_urls[1] }}" alt="Mars Hemisphere Image 2">
+                {% endif %}
                 <div class="card-body">
+                    {% if marsquery["hemheader"] is not defined %}
+                    <h5>Schiaparelli Hemisphere Enhanced</h5>
+                    
+                    {% else %}
                     <h5>{{ marsquery["hemheader"][1] }}</h5>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -114,9 +156,20 @@
         <div class="col-md-6">
 
             <div class="card">
-                <img class="card-img-top" src="{{ marsquery.hemisphere_image_urls[2] }}" alt="Card image cap">
+                {% if marsquery.hemisphere_image_urls is not defined %}
+                <img class="card-img-top" src="https://astrogeology.usgs.gov/cache/images/555e6403a6ddd7ba16ddb0e471cadcf7_syrtis_major_enhanced.tif_full.jpg" alt="Mars Hemisphere Image 3">
+
+                {% else %}
+                <img class="card-img-top" src="{{ marsquery.hemisphere_image_urls[2] }}" alt="Mars Hemisphere Image 3">
+                {% endif %}
+                
                 <div class="card-body">
+                    {% if marsquery["hemheader"] is not defined %}
+                    <h5>Syrtis Major Hemisphere Enhanced</h5>
+
+                    {% else %}
                     <h5>{{ marsquery["hemheader"][2] }}</h5>
+                    {% endif %}
                 </div>
             </div>
 
@@ -125,9 +178,20 @@
         <div class="col-md-6">
 
             <div class="card">
-                <img class="card-img-top" src="{{ marsquery.hemisphere_image_urls[3] }}" alt="Card image cap">
+                {% if marsquery.hemisphere_image_urls is not defined %}
+                <img class="card-img-top" src="https://astrogeology.usgs.gov/cache/images/b3c7c6c9138f57b4756be9b9c43e3a48_valles_marineris_enhanced.tif_full.jpg" alt="Mars Hemisphere Image 4">
+
+                {% else %}
+                <img class="card-img-top" src="{{ marsquery.hemisphere_image_urls[3] }}" alt="Mars Hemisphere Image 4">
+                {% endif %}
+
                 <div class="card-body">
+                    {% if marsquery["hemheader"] is not defined %}
+                    <h5>Valles Marineris Hemisphere Enhanced</h5>
+
+                    {% else %}
                     <h5>{{ marsquery["hemheader"][3] }}</h5>
+                    {% endif %}
                 </div>
             </div>
 
@@ -136,6 +200,6 @@
     </div>
 
 </div>
-{% endfor %}
+<!--{% endfor %}-->
     
 </body>
