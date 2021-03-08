@@ -33,24 +33,6 @@ mongo = PyMongo(app)
 # Declare the collection
 marscollection = mongo.db.marscollection
 
-
-#Need to populate the database so jinja template doesn't intially error
-#marscollection.insert(
-#    {"news_title": ["Please press the Scrape New Data button to refresh"],
-#    "paragraph_text": [""],
-#    "featured_image_url": "https://data-class-jpl-space.s3.amazonaws.com/JPL_Space/image/featured/mars3.jpg",
-#    "mars_table":"",
-#    "hemheader": ['Cerberus Hemisphere Enhanced',
-#    'Schiaparelli Hemisphere Enhanced',
-#    'Syrtis Major Hemisphere Enhanced',
-#    'Valles Marineris Hemisphere Enhanced'],
-#    "hemisphere_image_urls": ['https://astrogeology.usgs.gov/cache/images/f5e372a36edfa389625da6d0cc25d905_cerberus_enhanced.tif_full.jpg',
-# 'https://astrogeology.usgs.gov/cache/images/3778f7b43bbbc89d6e3cfabb3613ba93_schiaparelli_enhanced.tif_full.jpg',
-# 'https://astrogeology.usgs.gov/cache/images/555e6403a6ddd7ba16ddb0e471cadcf7_syrtis_major_enhanced.tif_full.jpg',
-# 'https://astrogeology.usgs.gov/cache/images/b3c7c6c9138f57b4756be9b9c43e3a48_valles_marineris_enhanced.tif_full.jpg']
-#    }
-#    )
-
 #################################################
 # scrape -Test
 #################################################
@@ -68,8 +50,6 @@ marscollection = mongo.db.marscollection
 
 @app.route("/")
 def index():
-#Needed to make this "index" to pick up index.html file 
-#    print("Server received request for 'Home' page...")
 
     marsquery = marscollection.find_one()
 
