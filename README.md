@@ -18,6 +18,10 @@ Project is finalised
     * Contains following documents:
         * index.html
 
+### Subdirectory: **static**
+* Contains following documents:
+    * style.css    
+
 ## Running order and notes
 ### Step 1 - Scraping
 **Run: mission_to_mars.ipynb**
@@ -27,7 +31,6 @@ Project is finalised
 * Using splinter to navigate [JPL Mars Space Images - Featured Image]((https://data-class-jpl-space.s3.amazonaws.com/JPL_Space/index.html)) and collect the image url for the current Featured Mars Image.
 * Using Pandas to scrape the table containing facts about the planet including Diameter, Mass, etc from the [Mars Facts webpage](https://space-facts.com/mars/). 
 * Visiting the [USGS Astrogeology site](https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars) to obtain high resolution images for each of Mar's hemispheres.
-* Includes code to establish the mondoDB "marsDB" and to insert a static document into the collection "marscollection" as jinja templating within the index.html requires data to initially display the html in a web browser.  
 
 ###  Step 2 - Convert Jupyter notebook into Python script
 **Execute in Mac OS Terminal**
@@ -54,13 +57,6 @@ Project is finalised
             #Insert retun dictionay function
             return marsdict 
 
-**Remove following code:**
-
-    db.marscollection.insert_one(
-                {...
-                }
-            )
-
 ### Step 4 - Launching html page
 **Run: app.py fom Terminal**
 * Visit http://127.0.0.1:5000/ in web browser
@@ -71,10 +67,9 @@ Project is finalised
 ## Notes
 **Jupyter Notebook: mission_to_mars.ipynb**
 * Commented out data checks, such as print soup requests and dataframes, to reduce  the content displayed in the githib repository. When running, you can uncomment to display data checks if you feel it is required.
-* included code to establish the mondoDB "marsDB" and to insert a document into the collection "marscollection" as jinja templating within the index.html required data to initially display the html in a web browser. 
 
-**scrape_mars.py**
-* Code to establish the mondoDB "marsDB" and to insert a document into the collection "marscollection" needs to be deleted so the scrape function doesn't insert a new document each time it is run.
+**index.html**
+* As the index.html file needs to render in the web browser, before the data has been scraped, I used jinja block code to insert static values into variable if the variable has not been defined (ie no key exists in the mongoDB).
 
 ## Technologies
 * Python ersion 3.6
@@ -100,7 +95,9 @@ Project is finalised
 * https://codeburst.io/jinja-2-explained-in-5-minutes-88548486834e
 
 * https://overiq.com/flask-101/basics-of-jinja-template-language/
-    Info on how to make jinja template render html tags correctly-->
+    Info on how to make jinja template render html tags correctly
+    
+* https://pythonbasics.org/flask-tutorial-templates/ & http://svn.python.org/projects/external/Jinja-2.1.1/docs/_build/html/templates.html - Info on setting tests for jinja templates to allow website to render without variables.
 
 
 ## Contact
