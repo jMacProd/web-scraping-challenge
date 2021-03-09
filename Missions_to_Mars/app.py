@@ -76,7 +76,7 @@ def scrape():
     
     #After loading the data go back to the home route
         #which will then display the data
-    return redirect("/", code=302)
+    return redirect("/")
 
 #################################################
 # End

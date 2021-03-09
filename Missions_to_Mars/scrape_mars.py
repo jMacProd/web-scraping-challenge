@@ -19,6 +19,7 @@ def scrape():
 
     #allows Python to reach out to the internet 
     import requests
+    from time import sleep
 
 
     # In[2]:
@@ -66,9 +67,11 @@ def scrape():
     news_title = []
     paragraph_text = []
 
-    
+    sleep(1)
+
     # Retrieve the news item title
-    title = results.find('div', class_='content_title')
+    #title = results.find('div', class_='content_title')
+    title = results.find('div', class_='list_text')
         
     # Access the titles text content
     title_text = title.a.text
@@ -267,7 +270,7 @@ def scrape():
     # In[29]:
 
 
-    from time import sleep
+    #from time import sleep
 
     #set new browser
     browsermh = Browser('chrome', **executable_path, headless=False)
@@ -432,3 +435,4 @@ def scrape():
 
     #Insert return dictionay function
     return marsdict
+
